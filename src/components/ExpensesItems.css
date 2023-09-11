@@ -1,31 +1,52 @@
+/* App.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.expense-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 800px;
+}
 
 .expense-item {
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-  }
-  .expense-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  .expenses-item-description {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-  }
-  .expenses-item-description h2 {
-    margin: 0;
-    font-size: 1.2rem;
-    color: #333;
-  }
-  .expenses-item-price {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: black; 
-  }
-  
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 10px;
+  width: calc(50% - 20px);
+}
+
+.expense-item span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+.expense-item h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333; /* Dark text color for title */
+}
+
+.expense-item .amount {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e74c3c; /* Red color for amount */
+}
+
+.expense-item .location {
+  font-size: 0.9rem;
+  color: #3498db; /* Blue color for location */
+}
