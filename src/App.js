@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ExpenseItem from './components/ExpensesItems';
 import './App.css';
 
@@ -29,16 +29,22 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
-  const clickHandler = (id) => {
-    console.log("deleted")
+
+  const [expenseList, setExpenseList] = useState(expenses);
+
+  const clickHandler = (index) => {
+    const updatedExpenses = [...expenseList];
+    updatedExpenses[index].amount = 100;
+    setExpenseList(updatedExpenses);
   };
-  const expenseItems = expenses.map((expense, index) => (
+
+  const expenseItems = expenseList.map((expense, index) => (
     <div className="expense-item" key={index}>
       <span>{expense.date.toISOString().split('T')[0]}</span>
       <h2>{expense.title}</h2>
       <span className="amount">RS {expense.amount}</span>
       <span className="location">{expense.location}</span>
-      <button onClick={clickHandler}>Delete</button>
+      <button onClick={() => clickHandler(index)}>Change Amount</button>
     </div>
   ));
 
