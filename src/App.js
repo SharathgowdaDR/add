@@ -1,56 +1,30 @@
 import React, { useState } from 'react';
-import ExpensesItems from './components/ExpensesItems';
+import ExpenseItem from './components/ExpensesItems';
+import ExpenseForm from './components/ExpensesForm';
 import './App.css';
 
 function App() {
-  const expenses = [
-    {
-      title: 'Food',
-      amount: 10,
-      location: 'Restaurant',
-      date: new Date(2021, 5, 12),
-    },
-    {
-      title: 'Petrol',
-      amount: 100,
-      location: 'Gas Station',
-      date: new Date(2021, 5, 12),
-    },
-    {
-      title: 'Movie',
-      amount: 200,
-      location: 'Cinema',
-      date: new Date(2021, 5, 12),
-    },
-    {
-      title: 'Groceries',
-      amount: 50,
-      location: 'Supermarket',
-      date: new Date(2021, 5, 12),
-    },
-  ];
+  const [expenses, setExpenses] = useState([]);
 
-  const [expenseList, setExpenseList] = useState(expenses);
-
-  const clickHandler = (index) => {
-    const updatedExpenses = [...expenseList];
-    updatedExpenses[index].amount = 100;
-    setExpenseList(updatedExpenses);
+  const addExpenseHandler = (newExpense) => {
+    setExpenses((prevExpenses) => [newExpense, ...prevExpenses]);
   };
 
-  const expenseItems = expenseList.map((expense, index) => (
-    <div className="expense-item" key={index}>
-      <span>{expense.date.toISOString().split('T')[0]}</span>
-      <h2>{expense.title}</h2>
-      <span className="amount">RS {expense.amount}</span>
-      <span className="location">{expense.location}</span>
-      <button onClick={() => clickHandler(index)}>Change Amount</button>
-    </div>
-  ));
-
   return (
-    <div className="expense-container">
-      {expenseItems}
+    <div className="App">
+      <h1>Expense Tracker</h1>
+      <ExpenseForm onAddExpense={addExpenseHandler} />
+      <div className="expense-container">
+        {expenses.map((expense, index) => (
+          <ExpenseItem
+            key={index}
+            date={expense.date}
+            title={expense.title}
+            amount={expense.amount}
+            location={expense.location}
+          />
+        ))}
+      </div>
     </div>
   );
 }
