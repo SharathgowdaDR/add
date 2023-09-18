@@ -7,14 +7,21 @@ import './App.css';
 function App() {
   const [expenses, setExpenses] = useState([]);
   const [selectedYear, setSelectedYear] = useState('');
+  const [isExpenseFormVisible, setIsExpenseFormVisible] = useState(false);
 
   const addExpenseHandler = (newExpense) => {
     setExpenses((prevExpenses) => [newExpense, ...prevExpenses]);
+    setIsExpenseFormVisible(false); 
   };
 
   const filterChangeHandler = (year) => {
     setSelectedYear(year);
   };
+
+  const toggleExpenseForm = () => {
+    setIsExpenseFormVisible(!isExpenseFormVisible);
+  };
+
   const filteredExpenses = selectedYear
     ? expenses.filter((expense) => expense.date.getFullYear().toString() === selectedYear)
     : expenses;
@@ -22,10 +29,16 @@ function App() {
   return (
     <div className="App">
       <h1>Expense Tracker</h1>
-      <ExpensesForm onAddExpense={addExpenseHandler} />
+      {isExpenseFormVisible ? (
+        <div>
+          <ExpensesForm onAddExpense={addExpenseHandler} onCancel={toggleExpenseForm} />
+        </div>
+      ) : (
+        <button onClick={toggleExpenseForm}>Add Expense</button>
+      )}
       <ExpensesFilter onFilterChange={filterChangeHandler} selectedYear={selectedYear} />
       {filteredExpenses.length === 1 ? (
-        <p>Only single Expense here. Please add more...</p>
+        <p>Only a single expense here. Please add more...</p>
       ) : (
         <div className="expense-container">
           {filteredExpenses.map((expense, index) => (
