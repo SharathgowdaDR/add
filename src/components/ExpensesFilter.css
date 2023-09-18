@@ -1,0 +1,19 @@
+
+
+.filter {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+  }
+  
