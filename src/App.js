@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ExpensesItem from './components/ExpensesItems';
+import ExpensesItem from './components/ExpensesItem';
 import ExpensesForm from './components/ExpensesForm';
-import ExpensesFilter from './components/ExpensesFilter'; 
+import ExpensesFilter from './components/ExpensesFilter';
 import './App.css';
 
 function App() {
@@ -15,7 +15,6 @@ function App() {
   const filterChangeHandler = (year) => {
     setSelectedYear(year);
   };
-
   const filteredExpenses = selectedYear
     ? expenses.filter((expense) => expense.date.getFullYear().toString() === selectedYear)
     : expenses;
@@ -25,17 +24,21 @@ function App() {
       <h1>Expense Tracker</h1>
       <ExpensesForm onAddExpense={addExpenseHandler} />
       <ExpensesFilter onFilterChange={filterChangeHandler} selectedYear={selectedYear} />
-      <div className="expense-container">
-        {filteredExpenses.map((expense, index) => (
-          <ExpensesItem
-            key={index}
-            date={expense.date}
-            title={expense.title}
-            amount={expense.amount}
-            location={expense.location}
-          />
-        ))}
-      </div>
+      {filteredExpenses.length === 1 ? (
+        <p>Only single Expense here. Please add more...</p>
+      ) : (
+        <div className="expense-container">
+          {filteredExpenses.map((expense, index) => (
+            <ExpensesItem
+              key={index}
+              date={expense.date}
+              title={expense.title}
+              amount={expense.amount}
+              location={expense.location}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
